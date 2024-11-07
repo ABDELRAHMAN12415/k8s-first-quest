@@ -1,0 +1,29 @@
+# flask-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app
+  namespace: web-db-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+      - name: flask-app
+        image: tiangolo/uwsgi-nginx-flask:python3.8  # Using a pre-built Flask image
+        env:
+        - name: REDIS_HOST
+          value: "redis"  # The service name for Redis
+        - name: REDIS_PORT
+          value: "6379"  # The service name for Redis
+        ports:
+        - containerPort: 80
+        command: [ "flask" ]
+        args: [ "run", "--host=0.0.0.0" ]
+
