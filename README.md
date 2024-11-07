@@ -1,4 +1,3 @@
-```markdown
 # Flask and Redis Kubernetes Deployment
 
 This project demonstrates a simple Flask application with Redis as a backend, deployed on Kubernetes using a StatefulSet for Redis and a Deployment for the Flask app. The Flask application connects to Redis for data storage.
